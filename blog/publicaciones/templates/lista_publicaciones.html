@@ -1,5 +1,4 @@
-<!-- publicaciones/templates/lista_publicaciones.html -->
-
+<!-- lista_publicaciones.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,12 +8,16 @@
     <h1>Lista de Publicaciones</h1>
     <ul>
         {% for publicacion in publicaciones %}
-            <li>{{ publicacion.titulo }}</li>
+        <li>
+            <h2>{{ publicacion.titulo }}</h2>
+            <p>{{ publicacion.contenido }}</p>
+            <h3>Comentarios:</h3>
             <ul>
-                {% for comentario in publicacion.comentarios.all %}
-                    <li>{{ comentario.texto }}</li>
+                {% for comentario in publicacion.comentarios %}
+                <li>{{ comentario.texto }}</li>
                 {% endfor %}
             </ul>
+        </li>
         {% endfor %}
     </ul>
 </body>
