@@ -10,4 +10,4 @@ class PublicacionForm(forms.ModelForm):
 class ComentarioForm(forms.ModelForm):
     class Meta:
         model = Comentario
-        fields = ['publicacion', 'autor', 'contenido']
+        fields = ('autor', 'contenido',)

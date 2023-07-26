@@ -1,0 +1,32 @@
+<!-- detalle_publicacion.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalle de Publicación</title>
+</head>
+<body>
+    <h1>{{ publicacion.titulo }}</h1>
+    <p>{{ publicacion.contenido }}</p>
+    <h3>Comentarios:</h3>
+    <ul>
+        {% for comentario in comentarios %}
+        <li>{{ comentario.contenido }}</li>
+        <a href="{% url 'actualizar_comentario' comentario.pk %}">Actualizar Comentario</a>
+        <a href="{% url 'eliminar_comentario' comentario.pk %}">Eliminar Comentario</a>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'actualizar_publicacion' publicacion.pk %}">Actualizar Publicación</a>
+    <a href="{% url 'eliminar_publicacion' publicacion.pk %}">Eliminar Publicación</a>
+
+    <!-- Agregar formulario para agregar comentario -->
+    <h3>Agregar Comentario:</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ comentario_form.as_p }}
+        <button type="submit">Enviar Comentario</button>
+    </form>
+</body>
+</html>
+
+

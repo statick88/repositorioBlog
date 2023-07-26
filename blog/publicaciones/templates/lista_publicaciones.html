@@ -11,10 +11,14 @@
         <li>
             <h2>{{ publicacion.titulo }}</h2>
             <p>{{ publicacion.contenido }}</p>
-            <h3>Comentarios:</h3>
+            <a href="{% url 'detalle_publicacion' pk=publicacion.pk %}">Ver detalles</a>
+            <a href="{% url 'actualizar_publicacion' pk=publicacion.pk %}">Actualizar</a>
+            <a href="{% url 'eliminar_publicacion' pk=publicacion.pk %}">Eliminar</a>
             <ul>
-                {% for comentario in publicacion.comentarios.all %}
+                {% for comentario in publicacion.comentarios %}
                 <li>{{ comentario.texto }}</li>
+                <a href="{% url 'actualizar_comentario' pk=comentario.pk %}">Actualizar</a>
+                <a href="{% url 'eliminar_comentario' pk=comentario.pk %}">Eliminar</a>
                 {% endfor %}
             </ul>
         </li>

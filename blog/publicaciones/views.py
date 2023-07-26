@@ -17,6 +17,27 @@ def crear_publicacion(request):
         form = PublicacionForm()
     return render(request, 'crear_publicacion.html', {'form': form})
 
+def detalle_publicacion(request, pk):
+    publicacion = get_object_or_404(Publicacion, pk=pk)
+    comentarios = Comentario.objects.filter(publicacion=publicacion)
+
+    if request.method == 'POST':
+        comentario_form = ComentarioForm(request.POST)
+        if comentario_form.is_valid():
+            comentario = comentario_form.save(commit=False)
+            comentario.publicacion = publicacion
+            comentario.save()
+            return redirect('detalle_publicacion', pk=pk)
+    else:
+        comentario_form = ComentarioForm()
+
+    context = {
+        'publicacion': publicacion,
+        'comentarios': comentarios,
+        'comentario_form': comentario_form,
+    }
+    return render(request, 'detalle_publicacion.html', context)
+
 def actualizar_publicacion(request, pk):
     publicacion = get_object_or_404(Publicacion, pk=pk)
     if request.method == 'POST':
@@ -26,7 +47,7 @@ def actualizar_publicacion(request, pk):
             return redirect('lista_publicaciones')
     else:
         form = PublicacionForm(instance=publicacion)
-    return render(request, 'actualizar_publicacion.html', {'form': form})
+    return render(request, 'crear_publicacion.html', {'form': form})
 
 def eliminar_publicacion(request, pk):
     publicacion = get_object_or_404(Publicacion, pk=pk)
@@ -51,18 +72,22 @@ def lista_comentarios(request):
 
 def actualizar_comentario(request, pk):
     comentario = get_object_or_404(Comentario, pk=pk)
+
     if request.method == 'POST':
-        form = ComentarioForm(request.POST, instance=comentario)
-        if form.is_valid():
-            form.save()
-            return redirect('lista_comentarios')
+        comentario_form = ComentarioForm(request.POST, instance=comentario)
+        if comentario_form.is_valid():
+            comentario_form.save()
+            return redirect('detalle_publicacion', pk=comentario.publicacion.pk)
     else:
-        form = ComentarioForm(instance=comentario)
-    return render(request, 'actualizar_comentario.html', {'form': form})
+        comentario_form = ComentarioForm(instance=comentario)
+
+    context = {
+        'comentario_form': comentario_form,
+    }
+    return render(request, 'actualizar_comentario.html', context)
 
 def eliminar_comentario(request, pk):
     comentario = get_object_or_404(Comentario, pk=pk)
-    if request.method == 'POST':
-        comentario.delete()
-        return redirect('lista_comentarios')
-    return render(request, 'eliminar_comentario.html', {'comentario': comentario})
+    publicacion_pk = comentario.publicacion.pk
+    comentario.delete()
+    return redirect('detalle_publicacion', pk=publicacion_pk)
