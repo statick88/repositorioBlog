@@ -28,3 +28,9 @@ def actualizar_publicacion(request, pk):
         form = PublicacionForm(instance=publicacion)
     return render(request, 'actualizar_publicacion.html', {'form': form})
 
+def eliminar_publicacion(request, pk):
+    publicacion = get_object_or_404(Publicacion, pk=pk)
+    if request.method == 'POST':
+        publicacion.delete()
+        return redirect('lista_publicaciones')
+    return render(request, 'eliminar_publicacion.html', {'publicacion': publicacion})
