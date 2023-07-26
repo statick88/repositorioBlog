@@ -1,0 +1,15 @@
+<!-- actualizar_comentario.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Actualizar Comentario</title>
+</head>
+<body>
+    <h1>Actualizar Comentario</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Cambios</button>
+    </form>
+</body>
+</html>

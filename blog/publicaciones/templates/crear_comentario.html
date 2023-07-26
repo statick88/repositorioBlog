@@ -1,0 +1,15 @@
+<!-- crear_comentario.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Comentario</title>
+</head>
+<body>
+    <h1>Crear Nuevo Comentario</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Crear</button>
+    </form>
+</body>
+</html>

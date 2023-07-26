@@ -1,0 +1,18 @@
+<!-- lista_comentarios.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Comentarios</title>
+</head>
+<body>
+    <h1>Lista de Comentarios</h1>
+    <ul>
+        {% for comentario in comentarios %}
+        <li>
+            <p>Comentario de {{ comentario.autor }} en {{ comentario.publicacion.titulo }}</p>
+            <p>{{ comentario.contenido }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
