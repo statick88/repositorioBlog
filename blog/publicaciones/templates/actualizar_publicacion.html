@@ -1,0 +1,15 @@
+<!-- actualizar_publicacion.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Actualizar Publicación</title>
+</head>
+<body>
+    <h1>Actualizar Publicación</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Cambios</button>
+    </form>
+</body>
+</html>

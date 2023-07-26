@@ -13,7 +13,7 @@
             <p>{{ publicacion.contenido }}</p>
             <h3>Comentarios:</h3>
             <ul>
-                {% for comentario in publicacion.comentarios %}
+                {% for comentario in publicacion.comentarios.all %}
                 <li>{{ comentario.texto }}</li>
                 {% endfor %}
             </ul>
