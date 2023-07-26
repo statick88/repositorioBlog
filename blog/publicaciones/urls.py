@@ -1,8 +1,8 @@
 # publicaciones/urls.py
 
 from django.urls import path
-from . import views
+from .views import ListaPublicacionesView
 
 urlpatterns = [
-    path('bienvenida/', views.vista_bienvenida, name='vista_bienvenida'),
+    path('publicaciones/', ListaPublicacionesView.as_view(), name='lista_publicaciones'),
 ]

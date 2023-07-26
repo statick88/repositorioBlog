@@ -1,6 +1,10 @@
 # publicaciones/views.py
 
-from django.http import HttpResponse
+from django.shortcuts import render
+from django.views.generic import ListView
+from .models import Publicacion
 
-def vista_bienvenida(request):
-    return HttpResponse("¡Bienvenido al blog!")
+class ListaPublicacionesView(ListView):
+    model = Publicacion
+    template_name = 'lista_publicaciones.html'
+    context_object_name = 'publicaciones'
