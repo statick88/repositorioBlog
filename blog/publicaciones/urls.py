@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     # Rutas de Publicaciones
+    path('', views.lista_publicaciones, name='lista_publicaciones'),
     path('lista/', views.lista_publicaciones, name='lista_publicaciones'),
     path('crear/', views.crear_publicacion, name='crear_publicacion'),
     path('detalle/<int:pk>/', views.detalle_publicacion, name='detalle_publicacion'),
