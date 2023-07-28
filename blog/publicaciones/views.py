@@ -2,6 +2,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PublicacionForm, ComentarioForm
 from .models import Publicacion, Comentario
+from rest_framework import generics
+from .serializers import PublicacionSerializer, ComentarioSerializer
 
 def lista_publicaciones(request):
     publicaciones = Publicacion.objects.all()
@@ -91,3 +93,19 @@ def eliminar_comentario(request, pk):
     publicacion_pk = comentario.publicacion.pk
     comentario.delete()
     return redirect('detalle_publicacion', pk=publicacion_pk)
+
+class ListaPublicaciones(generics.ListCreateAPIView):
+    queryset = Publicacion.objects.all()
+    serializer_class = PublicacionSerializer
+
+class DetallePublicacion(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Publicacion.objects.all()
+    serializer_class = PublicacionSerializer
+
+class ListaComentarios(generics.ListCreateAPIView):
+    queryset = Comentario.objects.all()
+    serializer_class = ComentarioSerializer
+
+class DetalleComentario(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comentario.objects.all()
+    serializer_class = ComentarioSerializer
