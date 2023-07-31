@@ -1,28 +1,35 @@
-<!-- lista_publicaciones.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Lista de Publicaciones</title>
-</head>
-<body>
-    <h1>Lista de Publicaciones</h1>
-    <ul>
-        {% for publicacion in publicaciones %}
-        <li>
-            <h2>{{ publicacion.titulo }}</h2>
-            <p>{{ publicacion.contenido }}</p>
-            <a href="{% url 'detalle_publicacion' pk=publicacion.pk %}">Ver detalles</a>
-            <a href="{% url 'actualizar_publicacion' pk=publicacion.pk %}">Actualizar</a>
-            <a href="{% url 'eliminar_publicacion' pk=publicacion.pk %}">Eliminar</a>
-            <ul>
-                {% for comentario in publicacion.comentarios %}
-                <li>{{ comentario.texto }}</li>
-                <a href="{% url 'actualizar_comentario' pk=comentario.pk %}">Actualizar</a>
-                <a href="{% url 'eliminar_comentario' pk=comentario.pk %}">Eliminar</a>
-                {% endfor %}
-            </ul>
-        </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Home - Mi Blog{% endblock %}
+
+{% block content %}
+<div class="jumbotron bg-primary text-white bg-dark">
+    <h1 class="display-4">Bienvenido a Mi Blog</h1>
+    <p class="lead">Este es el contenido de la página de inicio.</p>
+</div>
+
+<div class="container-fluid">
+    <div class="row bg-primary text-white">
+        <div class="col-12">
+            <h1 class="text-center">Lista de Publicaciones</h1>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-8 mx-auto">
+            {% for publicacion in publicaciones %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ publicacion.titulo }}</h5>
+                    <p class="card-text">{{ publicacion.contenido }}</p>
+                    <a href="{% url 'detalle_publicacion' publicacion.pk %}" class="btn btn-primary">Ver Detalles</a>
+                    <a href="{% url 'actualizar_publicacion' pk=publicacion.pk %}" class="btn btn-warning me-2">Actualizar</a>
+                    <a href="{% url 'eliminar_publicacion' pk=publicacion.pk %}" class="btn btn-danger">Eliminar</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

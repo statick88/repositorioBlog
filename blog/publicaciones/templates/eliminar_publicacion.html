@@ -1,9 +1,14 @@
 <!-- eliminar_publicacion.html -->
 <!DOCTYPE html>
 <html>
-<head>
+{% load static %}
+<!DOCTYPE html>
+<html>
     <title>Eliminar Publicación</title>
-</head>
+    <!-- Agrega el enlace al archivo CSS de Bootstrap -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <!-- Agrega tu archivo de estilos CSS personalizado -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 <body>
     <h1>Eliminar Publicación</h1>
     <p>¿Estás seguro de que deseas eliminar la publicación "{{ publicacion.titulo }}"?</p>

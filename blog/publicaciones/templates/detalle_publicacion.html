@@ -1,32 +1,31 @@
-<!-- detalle_publicacion.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Detalle de Publicación</title>
-</head>
-<body>
-    <h1>{{ publicacion.titulo }}</h1>
-    <p>{{ publicacion.contenido }}</p>
-    <h3>Comentarios:</h3>
-    <ul>
-        {% for comentario in comentarios %}
-        <li>{{ comentario.contenido }}</li>
-        <a href="{% url 'actualizar_comentario' comentario.pk %}">Actualizar Comentario</a>
-        <a href="{% url 'eliminar_comentario' comentario.pk %}">Eliminar Comentario</a>
-        {% endfor %}
-    </ul>
+{% extends 'base.html' %}
 
-    <a href="{% url 'actualizar_publicacion' publicacion.pk %}">Actualizar Publicación</a>
-    <a href="{% url 'eliminar_publicacion' publicacion.pk %}">Eliminar Publicación</a>
+{% load static %}
 
-    <!-- Agregar formulario para agregar comentario -->
-    <h3>Agregar Comentario:</h3>
-    <form method="post">
-        {% csrf_token %}
-        {{ comentario_form.as_p }}
-        <button type="submit">Enviar Comentario</button>
-    </form>
-</body>
-</html>
+{% block title %}
+Lista de Publicaciones
+{% endblock %}
 
-
+{% block content %}
+<div class="container-fluid">
+    <div class="row bg-primary text-white">
+        <div class="col-12">
+            <!-- Contenido de la lista de publicaciones -->
+            <h1 class="text-center">Lista de Publicaciones</h1>
+            <ul>
+                {% for publicacion in publicaciones %}
+                <li>
+                    <h2>{{ publicacion.titulo }}</h2>
+                    <p>{{ publicacion.contenido }}</p>
+                    <div class="text-center">
+                        <a href="{% url 'detalle_publicacion' pk=publicacion.pk %}" class="btn btn-primary me-2">Ver detalles</a>
+                        <a href="{% url 'actualizar_publicacion' pk=publicacion.pk %}" class="btn btn-warning me-2">Actualizar</a>
+                        <a href="{% url 'eliminar_publicacion' pk=publicacion.pk %}" class="btn btn-danger">Eliminar</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

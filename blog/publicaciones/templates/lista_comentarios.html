@@ -1,18 +1,32 @@
-<!-- lista_comentarios.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Lista de Comentarios</title>
-</head>
-<body>
-    <h1>Lista de Comentarios</h1>
-    <ul>
-        {% for comentario in comentarios %}
-        <li>
-            <p>Comentario de {{ comentario.autor }} en {{ comentario.publicacion.titulo }}</p>
-            <p>{{ comentario.contenido }}</p>
-        </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+Lista de Comentarios
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row bg-primary text-white bg-dark">
+        <div class="col-12">
+            <h1 class="text-center">Lista de Comentarios</h1>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-8 mx-auto">
+            <ul class="list-group">
+                {% for comentario in comentarios %}
+                <li class="list-group-item">
+                    <p>Comentario de {{ comentario.autor }} en {{ comentario.publicacion.titulo }}</p>
+                    <p>{{ comentario.contenido }}</p>
+                    <div class="text-end">
+                        <a href="{% url 'actualizar_comentario' comentario.pk %}" class="btn btn-warning btn-sm me-2">Actualizar Comentario</a>
+                        <a href="{% url 'eliminar_comentario' comentario.pk %}" class="btn btn-danger btn-sm">Eliminar Comentario</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

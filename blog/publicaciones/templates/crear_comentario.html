@@ -1,15 +1,22 @@
-<!-- crear_comentario.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Crear Comentario</title>
-</head>
-<body>
-    <h1>Crear Nuevo Comentario</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Crear</button>
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+Crear Comentario
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row bg-primary text-white bg-dark">
+        <div class="col-12">
+            <h1 class="text-center">Crear Nuevo Comentario</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

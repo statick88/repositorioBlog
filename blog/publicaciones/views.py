@@ -109,3 +109,15 @@ class ListaComentarios(generics.ListCreateAPIView):
 class DetalleComentario(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comentario.objects.all()
     serializer_class = ComentarioSerializer
+
+def home_view(request):
+    return render(request, 'home.html')
+
+def contacto_view(request):
+    return render(request, 'contacto.html')
+
+def quienes_somos_view(request):
+    return render(request, 'quienes_somos.html')
+
+def crear_view(request):
+    return render(request, 'crear.html')

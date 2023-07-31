@@ -21,4 +21,10 @@ urlpatterns = [
     path('publicaciones/<int:pk>/', views.DetallePublicacion.as_view(), name='detalle_publicacion'),
     path('comentarios/', views.ListaComentarios.as_view(), name='lista_comentarios'),
     path('comentarios/<int:pk>/', views.DetalleComentario.as_view(), name='detalle_comentario'),
+
+    path('home/', views.home_view, name='home'),
+    path('contacto/', views.contacto_view, name='contacto'),
+    path('quienes_somos/', views.quienes_somos_view, name='quienes_somos'),
+    path('crear/', views.crear_view, name='crear_publicacion'),
+    
 ]
